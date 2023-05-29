@@ -47,6 +47,8 @@ sudo ./skameika <server_port>
 sudo ./client <hotel ip> <hotel port> <people amount> <day delay in seconds> <skameika ip> <skameika port>
 ```
 ### Пример работы
+**Видеозапись работы примера находится по ссылке: https://disk.yandex.ru/d/3h3WPF98mC3GkQ**
+эту же ссылку можно найти в файле `demo_link.txt`
 1. Запуск Отеля
 ```
 sudo ./server 7 5
