@@ -30,9 +30,9 @@ void setupConnection(int* sock, struct sockaddr_in* echoServAddr, unsigned short
 
     /* Construct the server address structure */
     memset(echoServAddr, 0, sizeof(*echoServAddr));     /* Zero out structure */
-    echoServAddr->sin_family      = AF_INET;             /* Internet address family */
-    echoServAddr->sin_addr.s_addr = inet_addr(servIP);   /* Server IP address */
-    echoServAddr->sin_port        = htons(echoServPort); /* Server port */
+    echoServAddr.sin_family = AF_INET;                /* Internet address family */
+    echoServAddr.sin_addr.s_addr = htonl(INADDR_ANY); /* Any incoming interface */
+    echoServAddr.sin_port = htons(echoServPort);      /* Local port */
 }
 
 int main(int argc, char *argv[])
