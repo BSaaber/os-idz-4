@@ -160,7 +160,6 @@ int main(int argc, char *argv[])
                 }
             } else if (!strcmp(clients[i], sit_request)) {
                 printf("client goes to skameika\n");
-// todo
 
                 setupConnection(&sock_skameika, &echoServAddr_skameika, echoServPort_skameika, servIP_skameika);
 
@@ -187,7 +186,6 @@ int main(int argc, char *argv[])
 
                 close(sock_skameika);
 
-//endof todo
 
 
 

@@ -59,9 +59,6 @@ int main(int argc, char *argv[])
         char echoBuffer[ECHOMAX];        /* Buffer for echo string */
         int recvMsgSize;                    /* Size of received message */
         char* success_response = "okay\0";
-        char* error_response =   "fail\0";
-        char* rent_request = "rent\0";
-        char* free_request = "free\0";
         char* response;
 
         /* Receive message from client */
@@ -78,8 +75,6 @@ int main(int argc, char *argv[])
                    (struct sockaddr *) &echoClntAddr, sizeof(echoClntAddr)) != strlen(response))
             DieWithError("sendto() sent a different number of bytes than expected");
 
-        //close(servSock);    /* Close client socket */
-        printf("log: connection closed\n");
         ////////////////////////////////////////////////////////////
 
     }

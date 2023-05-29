@@ -16,7 +16,6 @@ int main(int argc, char *argv[])
     struct sockaddr_in echoServAddr; /* Local address */
     struct sockaddr_in echoClntAddr; /* Client address */
     unsigned short echoServPort;     /* Server port */
-    unsigned int clntLen;            /* Length of client address data structure */
     unsigned int cliAddrLen;         /* Length of incoming message */
 
     if (argc != 3)     /* Test for correct number of arguments */
@@ -95,8 +94,6 @@ int main(int argc, char *argv[])
                    (struct sockaddr *) &echoClntAddr, sizeof(echoClntAddr)) != strlen(response))
             DieWithError("sendto() sent a different number of bytes than expected");
 
-        //close(servSock);    /* Close client socket */
-        printf("log: connection closed\n");
         ////////////////////////////////////////////////////////////
 
     }
