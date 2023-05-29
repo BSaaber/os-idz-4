@@ -58,7 +58,7 @@ int main(int argc, char *argv[])
         //////////////////// HandleTCPClient  //////////////////////
 
 
-        char echoBuffer[RCVBUFSIZE];        /* Buffer for echo string */
+        char echoBuffer[ECHOMAX];        /* Buffer for echo string */
         int recvMsgSize;                    /* Size of received message */
         char* success_response = "okay\0";
         char* error_response =   "fail\0";
