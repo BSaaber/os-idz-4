@@ -9,7 +9,6 @@
 #define ECHOMAX 255
 
 void DieWithError(char *errorMessage);  /* Error handling function */
-void HandleTCPClient(int clntSocket, int* free_space);   /* TCP client handling function */
 
 int main(int argc, char *argv[])
 {
