@@ -130,7 +130,7 @@ int main(int argc, char *argv[])
                 /* Recv a response */
                 fromSize = sizeof(fromAddr);
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
-                                              (struct sockaddr *) &fromAddr, &fromSize)
+                                              (struct sockaddr *) &fromAddr, &fromSize);
 
                 if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
                 {
@@ -228,7 +228,7 @@ int main(int argc, char *argv[])
                 /* Recv a response */
                 fromSize = sizeof(fromAddr);
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
-                                              (struct sockaddr *) &fromAddr, &fromSize)
+                                              (struct sockaddr *) &fromAddr, &fromSize);
 
                 if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
                 {
