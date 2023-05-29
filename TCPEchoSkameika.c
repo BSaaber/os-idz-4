@@ -68,7 +68,6 @@ int main(int argc, char *argv[])
         if ((recvMsgSize = recvfrom(servSock, echoBuffer, ECHOMAX, 0,
                                     (struct sockaddr *) &echoClntAddr, &cliAddrLen)) < 0)
             DieWithError("recvfrom() failed");
-        printf("log: free space - %d\n", free_space);
 
         /* Send received string and receive again until end of transmission */
         response = success_response;
