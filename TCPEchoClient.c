@@ -84,6 +84,7 @@ int main(int argc, char *argv[])
     struct sockaddr_in echoServAddr_skameika; /* Echo server address */
     unsigned short echoServPort_skameika;     /* Echo server port */
     char *servIP_skameika;                    /* Server IP address (dotted quad) */
+    struct sockaddr_in fromAddr_skameika;     /* Source address of echo */
 
     servIP_skameika = argv[5];             /* First arg: server IP address (dotted quad) */
     echoServPort_skameika = atoi(argv[6]); /* Use given port, if any */
@@ -113,13 +114,6 @@ int main(int argc, char *argv[])
                 printf("client tries to rent a room\n");
 
                 setupConnection(&sock, &echoServAddr, echoServPort, servIP);
-                /* Establish the connection to the echo server */
-//                if (connect(sock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0)
-//                    DieWithError("connect() failed");
-//
-//                /* Send the string to the server */
-//                if (send(sock, clients[i], strlen(clients[i]), 0) != strlen(clients[i]))
-//                    DieWithError("send() sent a different number of bytes than expected");
                 if (sendto(sock, clients[i], strlen(clients[i]), 0, (struct sockaddr *)
                         &echoServAddr, sizeof(echoServAddr)) != strlen(clients[i]))
                     DieWithError("sendto() sent a different number of bytes than expected");
@@ -132,11 +126,6 @@ int main(int argc, char *argv[])
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
                                               (struct sockaddr *) &fromAddr, &fromSize);
 
-//                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
-//                {
-//                    fprintf(stderr,"Error: received a packet from unknown source.\n");
-//                    exit(1);
-//                }
 
                 //////
                 echoBuffer[bytesRcvd] = '\0';  /* Terminate the string! */
@@ -173,35 +162,30 @@ int main(int argc, char *argv[])
                 printf("client goes to skameika\n");
 // todo
 
-//                setupConnection(&sock_skameika, &echoServAddr_skameika, echoServPort_skameika, servIP_skameika);
-//                /* Establish the connection to the echo server */
-//                if (connect(sock_skameika, (struct sockaddr *) &echoServAddr_skameika, sizeof(echoServAddr_skameika)) < 0)
-//                    DieWithError("connect() failed");
-//
-//                if (send(sock_skameika, clients[i], strlen(clients[i]), 0) != strlen(clients[i]))
-//                    DieWithError("send() sent a different number of bytes than expected");
-//
-//                totalBytesRcvd = 0;
-//                while (totalBytesRcvd < MESSAGE_SIZE) {
-//                    /* Receive up to the buffer size (minus 1 to leave space for
-//                    a null terminator) bytes from the sender */
-//                    if ((bytesRcvd = recv(sock_skameika, echoBuffer, RCVBUFSIZE - 1, 0)) <= 0)
-//                        DieWithError("recv() failed or connection closed prematurely");
-//                    totalBytesRcvd += bytesRcvd;   /* Keep tally of total bytes */
-//                    echoBuffer[bytesRcvd] = '\0';  /* Terminate the string! */
-//                    printf("message, that client %d recieved: ", i);
-//                    printf("%s\n", echoBuffer);      /* Print the echo buffer */
-//
-//                    // case success - client rent a room
-//                    if (strcmp(echoBuffer, success_response)) {
-//                        printf("WHAT? I CAN NOT SIT ON SKAMEIKA? THIS IS STRANGE!\n");
-//                        exit(-1);
-//                    }
-//                    printf("i got to the skameika.\n");
-//                }
-//
-//
-//                close(sock_skameika);
+                setupConnection(&sock_skameika, &echoServAddr_skameika, echoServPort_skameika, servIP_skameika);
+
+                if (sendto(sock_skameika, clients[i], strlen(clients[i]), 0, (struct sockaddr *)
+                        &echoServAddr_skameika, sizeof(echoServAddr_skameika)) != strlen(clients[i]))
+                    DieWithError("sendto() sent a different number of bytes than expected");
+
+
+                /* Recv a response */
+                fromSize = sizeof(fromAddr_skameika);
+                bytesRcvd = recvfrom(sock_skameika, echoBuffer, ECHOMAX, 0,
+                                     (struct sockaddr *) &fromAddr_skameika, &fromSize);
+
+                echoBuffer[bytesRcvd] = '\0';  /* Terminate the string! */
+                printf("message, that client %d recieved: ", i);
+                printf("%s\n", echoBuffer);      /* Print the echo buffer */
+
+                // case success - client rent a room
+                if (strcmp(echoBuffer, success_response)) {
+                    printf("WHAT? I CAN NOT SIT ON SKAMEIKA? THIS IS STRANGE!\n");
+                    exit(-1);
+                }
+                printf("i got to the skameika.\n");
+
+                close(sock_skameika);
 
 //endof todo
 
@@ -214,12 +198,6 @@ int main(int argc, char *argv[])
                 printf("client goes to free a room\n");
 
                 setupConnection(&sock, &echoServAddr, echoServPort, servIP);
-//                /* Establish the connection to the echo server */
-//                if (connect(sock, (struct sockaddr *) &echoServAddr, sizeof(echoServAddr)) < 0)
-//                    DieWithError("connect() failed");
-//
-//                if (send(sock, clients[i], strlen(clients[i]), 0) != strlen(clients[i]))
-//                    DieWithError("send() sent a different number of bytes than expected");
                 if (sendto(sock, clients[i], strlen(clients[i]), 0, (struct sockaddr *)
                         &echoServAddr, sizeof(echoServAddr)) != strlen(clients[i]))
                     DieWithError("sendto() sent a different number of bytes than expected");
@@ -230,11 +208,6 @@ int main(int argc, char *argv[])
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
                                               (struct sockaddr *) &fromAddr, &fromSize);
 
-//                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
-//                {
-//                    fprintf(stderr,"Error: received a packet from unknown source.\n");
-//                    exit(1);
-//                }
 
 
                 //////
