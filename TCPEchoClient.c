@@ -132,11 +132,11 @@ int main(int argc, char *argv[])
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
                                               (struct sockaddr *) &fromAddr, &fromSize);
 
-                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
-                {
-                    fprintf(stderr,"Error: received a packet from unknown source.\n");
-                    exit(1);
-                }
+//                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
+//                {
+//                    fprintf(stderr,"Error: received a packet from unknown source.\n");
+//                    exit(1);
+//                }
 
                 //////
                 echoBuffer[bytesRcvd] = '\0';  /* Terminate the string! */
@@ -230,11 +230,11 @@ int main(int argc, char *argv[])
                 bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
                                               (struct sockaddr *) &fromAddr, &fromSize);
 
-                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
-                {
-                    fprintf(stderr,"Error: received a packet from unknown source.\n");
-                    exit(1);
-                }
+//                if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
+//                {
+//                    fprintf(stderr,"Error: received a packet from unknown source.\n");
+//                    exit(1);
+//                }
 
 
                 //////
