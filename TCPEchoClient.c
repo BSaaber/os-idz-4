@@ -129,9 +129,8 @@ int main(int argc, char *argv[])
 
                 /* Recv a response */
                 fromSize = sizeof(fromAddr);
-                if ((respStringLen = recvfrom(sock, echoBuffer, ECHOMAX, 0,
-                                              (struct sockaddr *) &fromAddr, &fromSize)) != echoStringLen)
-                    DieWithError("recvfrom() failed");
+                bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
+                                              (struct sockaddr *) &fromAddr, &fromSize)
 
                 if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
                 {
@@ -228,9 +227,8 @@ int main(int argc, char *argv[])
 
                 /* Recv a response */
                 fromSize = sizeof(fromAddr);
-                if ((respStringLen = recvfrom(sock, echoBuffer, ECHOMAX, 0,
-                                              (struct sockaddr *) &fromAddr, &fromSize)) != echoStringLen)
-                    DieWithError("recvfrom() failed");
+                bytesRcvd = recvfrom(sock, echoBuffer, ECHOMAX, 0,
+                                              (struct sockaddr *) &fromAddr, &fromSize)
 
                 if (echoServAddr.sin_addr.s_addr != fromAddr.sin_addr.s_addr)
                 {
