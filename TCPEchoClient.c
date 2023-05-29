@@ -65,7 +65,10 @@ int main(int argc, char *argv[])
     struct sockaddr_in echoServAddr; /* Echo server address */
     struct sockaddr_in fromAddr;     /* Source address of echo */
     unsigned short echoServPort;     /* Echo server port */
+    unsigned int fromSize;           /* In-out of address size for recvfrom() */
     char *servIP;                    /* Server IP address (dotted quad) */
+    int echoStringLen;               /* Length of string to echo */
+    int respStringLen;               /* Length of received response */
 
     servIP = argv[1];             /* First arg: server IP address (dotted quad) */
     echoServPort = atoi(argv[2]); /* Use given port, if any */
